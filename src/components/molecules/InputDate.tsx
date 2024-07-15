@@ -34,6 +34,7 @@ const InputDate: React.FC<InputDateProps> = ({ date, setDate, description, size 
             <Text bold textAlign="center" style={{ marginBottom: "2%" }}>Please, select {description} date.</Text>
             <Calendar
                 enableSwipeMonths
+                current="2023-11-21"
                 theme={{
                     arrowColor: theme.colors.primary,
                     todayTextColor: theme.colors.statusInTheAir,

@@ -22,14 +22,12 @@ export const theme = {
         small: 14,
         medium: 16,
         large: 18,
-        huge: 26
+        extraLarge: 26,
+        huge: 32
     }
 }
 
 export type ThemeType = typeof theme;
-
-
-
 
 
 

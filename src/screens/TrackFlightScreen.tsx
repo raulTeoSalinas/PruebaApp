@@ -14,8 +14,33 @@ import {
 import { Airport } from "../models/Airport"
 import { BottomSheetModalProvider, BottomSheetModal } from "@gorhom/bottom-sheet"
 import styled from "styled-components/native"
+import { useNavigation } from "@react-navigation/native"
+import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import { RootStackParamList } from "../../App"
 
-const TrackFlightScreen = () => {
+type TrackFlightScreenProps = NativeStackScreenProps<RootStackParamList, "TrackFlightScreen">
+
+const TrackFlightScreen: React.FC<TrackFlightScreenProps> = (props) => {
+
+    const { navigation } = props;
+
+    const navigateFLScreenByNumber = () => {
+        navigation.navigate("FlightsListingScreen", {
+            departureDate: departureDate,
+            flightNumber: flightNumber,
+            destinationAirport: null,
+            originAirport: null,
+        })
+    }
+
+    const navigateFLScreenByDestination = () => {
+        navigation.navigate("FlightsListingScreen", {
+            departureDate: departureDate,
+            flightNumber: null,
+            destinationAirport: destinationAirport,
+            originAirport: originAirport,
+        })
+    }
 
     const [originAirport, setOriginAirport] = useState<Airport | null>(null);
     const [destinationAirport, setDestinationAirport] = useState<Airport | null>(null);
@@ -31,7 +56,7 @@ const TrackFlightScreen = () => {
 
             <Container>
                 <Header>
-                    <Text style={{ marginTop: 40 }} bold size="huge">Track your flight</Text>
+                    <Text style={{ marginTop: 40 }} bold size="extraLarge">Track your flight</Text>
                     <Text>Keep you informed in real time!</Text>
                 </Header>
                 <ToggleContainer>
@@ -45,6 +70,7 @@ const TrackFlightScreen = () => {
                             flightNumber={flightNumber}
                             setFlightNumber={setFlightNumber}
                             setIsByFlightNumber={setIsByFlightNumber}
+                            navigateFLScreen={navigateFLScreenByNumber}
                         />
                     ) : (
                         <FormDestination
@@ -56,6 +82,7 @@ const TrackFlightScreen = () => {
                             setDepartureDate={setDepartureDate}
                             setIsByFlightNumber={setIsByFlightNumber}
                             airports={airports}
+                            navigateFLScreen={navigateFLScreenByDestination}
                         />
                     )
                 }
@@ -71,6 +98,7 @@ const Container = styled.View`
     flex: 1;
     justify-content: start;
     align-items: center;
+    background-color: ${props => props.theme.colors.background};
 `;
 
 const Header = styled.View`
