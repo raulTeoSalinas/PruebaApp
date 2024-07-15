@@ -6,12 +6,12 @@ import styled from "styled-components/native"
 
 type KnobProps = {
   isActive: boolean,
-  setIsActive?: () => void
+  onPress: () => void
 }
 
-const Knob: React.FC<KnobProps> = ({ isActive, setIsActive }) => {
+const Knob: React.FC<KnobProps> = ({ isActive, onPress }) => {
   return (
-    <Container isActive={isActive}>
+    <Container onPress={onPress} isActive={isActive}>
       <Circle />
     </Container>
   )

@@ -20,14 +20,10 @@ const useInputDate = (setDate: (date: string | null) => void) => {
         presentRef.current?.present();
     }, []);
 
-    /**
-     * Handler function when an date is selected.
-     * Updates the selected date state and closes the modal.
-     * @param selectedDate The date string selected by the user.
-     */
-    const handleSelectDate = (selectedDate: string) => {
+
+    const formatDate = (dateToFormat: string) => {
         // Create a Date object with the local time zone to avoid mismatches       
-        const [year, month, day] = selectedDate.split('-').map(Number);
+        const [year, month, day] = dateToFormat.split('-').map(Number);
         const date = new Date(year, month - 1, day);
 
         // Convert the date to the time zone and format it
@@ -37,9 +33,13 @@ const useInputDate = (setDate: (date: string | null) => void) => {
             month: 'short',
             day: 'numeric'
         };
-        const formattedDate = date.toLocaleDateString('en-US', options);
+        const formattedDate = date.toLocaleDateString('en-US', options)
 
-        setDate(formattedDate);
+        return formattedDate
+    }
+
+    const handleSelectDate = (selectedDate: string) => {
+        setDate(selectedDate);
         closeModal();
     };
 
@@ -51,6 +51,7 @@ const useInputDate = (setDate: (date: string | null) => void) => {
         presentRef,
         handleOpenModal,
         handleSelectDate,
+        formatDate
     };
 };
 

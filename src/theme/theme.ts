@@ -10,7 +10,7 @@ export const theme = {
         statusInTheAir: "#1872B3",
         statusOnTime: "#2E9509",
         statusDelayed: "#FECB2F",
-
+        error: "#ae2727ff"
     },
     fonts: {
         regular: "Garnett-Regular",
