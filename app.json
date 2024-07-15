@@ -12,19 +12,26 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lesnooy.pruebaApp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/app/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.lesnooy.pruebaApp"
     },
     "web": {
       "favicon": "./src/assets/images/app/favicon.png"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "03aa0b48-666f-4431-9e99-249eb48035a5"
+      }
+    }
   }
 }

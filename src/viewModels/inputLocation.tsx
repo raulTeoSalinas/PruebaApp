@@ -1,5 +1,8 @@
+// React
 import { useMemo, useRef, useCallback } from "react";
+// External Dependencies
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
+// Internal Dependencies
 import { Airport } from "../models/Airport";
 
 // Custom hook to manage airport selection and Present modal interactions.

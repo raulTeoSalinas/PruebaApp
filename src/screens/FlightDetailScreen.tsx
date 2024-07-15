@@ -1,15 +1,103 @@
-import { Image, TouchableOpacity } from 'react-native'
-import React, { useMemo } from 'react'
+// React
+import React from 'react'
+// React Native
+import { Image } from 'react-native'
+// External Dependencies
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
-import { RootStackParamList } from "../../App"
-import styled from "styled-components/native"
-import { Icon } from "../components"
 import BottomSheet from '@gorhom/bottom-sheet';
+import styled from "styled-components/native"
+// Internal Dependencies
+import { RootStackParamList } from "../../App"
+import { Icon } from "../components"
 import { theme } from "../theme/theme"
 import {
     Text,
     Itinerary
 } from "../components"
+import useFlightDetailScreen from "../viewModels/flightDetailScreen"
+
+const Container = styled.View`
+flex: 1;
+justify-content: start;
+align-items: center;
+background-color: ${props => props.theme.colors.background};
+`;
+
+const FloatingButton = styled.TouchableOpacity`
+position: absolute;
+width: 40px;
+height: 40px;
+top: 8%;
+left: 5%;
+background-color: ${(props) => props.theme.colors.background};
+padding: 10px;
+border-radius: 50px;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+`;
+
+const Row = styled.View`
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+`
+const RowHeader = styled.View`
+flex-direction: row;
+justify-content: space-between;
+padding-right: 4.5%;
+padding-left: 4.5%;
+align-items: center;
+padding-bottom: 18px;
+border-bottom-width: 1px;
+border-color: ${(props) => props.theme.colors.border} ;
+`
+
+const Column = styled.View`
+justify-content: center;
+align-items: flex-start;
+
+`
+
+const FlagStatus = styled.View <{ status: string }>`
+background-color: ${(props) =>
+        props.status === 'ARRIVED'
+            ? props.theme.colors.primary
+            : props.status === "ON_TIME"
+                ? props.theme.colors.statusOnTime
+                : props.status === 'DELAYED'
+                    ? props.theme.colors.statusDelayed
+                    : props.status === 'IN-THE-AIR'
+                        ? props.theme.colors.statusInTheAir
+                        : 'transparent'};
+border-radius: 4px;
+padding: 8px 10px;
+`
+
+const RowDetail = styled.View`
+flex-direction: row;
+justify-content: flex-start;
+align-items: center;
+border-radius: 12px;
+margin-left: 5%;
+margin-right: 5%;
+gap: 30px;
+padding: 10px;
+background-color: ${(props) => props.theme.colors.backgroundContrast};
+`
+
+const ColumnDetail = styled.View`
+justify-content: flex-start;
+align-items: flex-start;
+
+`
+
+const ContainerItinerary = styled.View`
+width: 100%;
+justify-content: center;
+align-items: center;
+`
+
 
 type FlightsListingScreenProps = NativeStackScreenProps<RootStackParamList, "FlightDetailScreen">
 
@@ -20,29 +108,7 @@ const FlightDetailScreen: React.FC<FlightsListingScreenProps> = (props) => {
 
     const { navigation } = props;
 
-    const snapPoints = useMemo(() => ['60%', '80%'], []);
-
-    const capitalizeFirstLetter = (str: string) => {
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    };
-
-    const formatDate = (dateString: string) => {
-
-        const date = new Date(dateString);
-
-        // Convert the date to the time zone and format it
-        const options: Intl.DateTimeFormatOptions = {
-            timeZone: 'America/Mexico_City',
-            weekday: 'long',
-            month: 'short',
-            day: 'numeric'
-        };
-        const formattedDate = date.toLocaleDateString('en-US', options);
-
-        return formattedDate
-
-    };
-
+    const { snapPoints, formatDate, capitalizeFirstLetter } = useFlightDetailScreen()
 
     return (
         <Container>
@@ -117,85 +183,3 @@ const FlightDetailScreen: React.FC<FlightsListingScreenProps> = (props) => {
 }
 
 export default FlightDetailScreen;
-
-const Container = styled.View`
-    flex: 1;
-    justify-content: start;
-    align-items: center;
-    background-color: ${props => props.theme.colors.background};
-`;
-
-const FloatingButton = styled.TouchableOpacity`
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  top: 8%;
-  left: 5%;
-  background-color: ${(props) => props.theme.colors.background};
-  padding: 10px;
-  border-radius: 50px;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-`;
-
-const Row = styled.View`
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-`
-const RowHeader = styled.View`
-    flex-direction: row;
-    justify-content: space-between;
-    padding-right: 4.5%;
-    padding-left: 4.5%;
-    align-items: center;
-    padding-bottom: 18px;
-    border-bottom-width: 1px;
-    border-color: ${(props) => props.theme.colors.border} ;
-`
-
-const Column = styled.View`
-    justify-content: center;
-    align-items: flex-start;
-    
-`
-
-const FlagStatus = styled.View <{ status: string }>`
-  background-color: ${(props) =>
-        props.status === 'ARRIVED'
-            ? props.theme.colors.primary
-            : props.status === "ON_TIME"
-                ? props.theme.colors.statusOnTime
-                : props.status === 'DELAYED'
-                    ? props.theme.colors.statusDelayed
-                    : props.status === 'IN-THE-AIR'
-                        ? props.theme.colors.statusInTheAir
-                        : 'transparent'};
-    border-radius: 4px;
-    padding: 8px 10px;
-`
-
-const RowDetail = styled.View`
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    border-radius: 12px;
-    margin-left: 5%;
-    margin-right: 5%;
-    gap: 30px;
-    padding: 10px;
-    background-color: ${(props) => props.theme.colors.backgroundContrast};
-`
-
-const ColumnDetail = styled.View`
-    justify-content: flex-start;
-    align-items: flex-start;
-
-`
-
-const ContainerItinerary = styled.View`
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-`

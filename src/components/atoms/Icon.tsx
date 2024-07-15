@@ -1,3 +1,10 @@
+// React
+import React from "react";
+// React Native
+import { ViewStyle } from 'react-native'
+// Internal Dependencies
+import { ThemeType, theme } from "../../theme/theme";
+// Icons SVG
 import Calendar from "../../assets/icons/calendar.svg";
 import ArrowLeft from "../../assets/icons/arrowLeft.svg";
 import ArrowLeft2 from "../../assets/icons/arrowLeft2.svg";
@@ -6,10 +13,8 @@ import ArrowRight2 from "../../assets/icons/arrowRight2.svg";
 import PlaneArrival from "../../assets/icons/planeArrival.svg";
 import PlaneDeparture from "../../assets/icons/planeDeparture.svg";
 import PlaneStatus from "../../assets/icons/planeStatus.svg";
-import { ThemeType, theme } from "../../theme/theme";
-import React from "react";
-import { ViewStyle } from 'react-native'
 
+// Type Definition
 type IconProps = {
     name: string;
     color?: keyof ThemeType['colors'];
@@ -18,6 +23,7 @@ type IconProps = {
     style?: ViewStyle
 }
 
+// Component Definition
 const Icon: React.FC<IconProps> = ({ name, color = "primary", width = 15, height = 15, style }) => {
 
     switch (name) {

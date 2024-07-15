@@ -1,8 +1,19 @@
-
-import { View, Text } from 'react-native'
+// React
 import React from 'react'
-import PillButton from "../atoms/PillButton"
+// External Dependencies
 import styled from "styled-components/native"
+// Internal Dependencies
+import PillButton from "../atoms/PillButton"
+
+const Container = styled.View`
+    flex-direction: row;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) => props.theme.colors.background};
+    border: 1px solid ${(props) => props.theme.colors.knobUnactive};
+    border-radius: 4px;
+`
 
 type ToggleBookProps = {
     isByFlightNumber: boolean;
@@ -32,15 +43,5 @@ const ToggleBook: React.FC<ToggleBookProps> = ({ isByFlightNumber, setIsByFlight
         </Container>
     )
 }
-
-const Container = styled.View`
-    flex-direction: row;
-    padding: 4px;
-    justify-content: center;
-    align-items: center;
-    background-color: ${(props) => props.theme.colors.background};
-    border: 1px solid ${(props) => props.theme.colors.knobUnactive};
-    border-radius: 4px;
-`
 
 export default ToggleBook;

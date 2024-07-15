@@ -1,11 +1,39 @@
-
+// React
 import React from 'react'
+// External Dependencies
 import styled from "styled-components/native"
+// Internal Dependencies
 import InputFlightNumber from "../molecules/InputFlightNumber"
 import InputDate from "../molecules/InputDate"
 import PillButton from "../atoms/PillButton"
 import Text from "../atoms/Text"
 import TextButton from "../atoms/TextButton"
+
+// Styled Components
+const RowInputs = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 87.80%;
+    margin-top: 35px;
+`
+const ButtonContainer = styled.View`
+    margin-top: 20px;
+    width: 87.80%;
+`
+const LegendContainer = styled.View`
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+`
+
+const LegendRow = styled.View`
+    flex-direction: row;
+    margin-top: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+`
 
 interface FormFlightNumberProps {
     flightNumber: string;
@@ -44,30 +72,5 @@ const FormFlightNumber: React.FC<FormFlightNumberProps> = ({
         </>
     )
 }
-
-const RowInputs = styled.View`
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 87.80%;
-    margin-top: 35px;
-`
-const ButtonContainer = styled.View`
-    margin-top: 20px;
-    width: 87.80%;
-`
-const LegendContainer = styled.View`
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-`
-
-const LegendRow = styled.View`
-    flex-direction: row;
-    margin-top: 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-`
 
 export default FormFlightNumber

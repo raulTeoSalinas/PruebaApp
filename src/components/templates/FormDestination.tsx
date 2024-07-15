@@ -1,13 +1,45 @@
-
+// React
 import React from 'react'
+// External Dependencies
 import styled from "styled-components/native"
-import InputFlightNumber from "../molecules/InputFlightNumber"
+// Internal Dependencies
 import InputDate from "../molecules/InputDate"
 import PillButton from "../atoms/PillButton"
 import Text from "../atoms/Text"
 import TextButton from "../atoms/TextButton"
 import { Airport } from "../../models/Airport"
 import InputLocation from "../molecules/InputLocation"
+
+// Styled components
+const RowInputs = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 87.80%;
+    margin-top: 35px;
+`
+const ButtonContainer = styled.View`
+    width: 87.80%;
+    margin-top: 20px;
+`
+const LegendContainer = styled.View`
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+`
+
+const LegendRow = styled.View`
+    flex-direction: row;
+    margin-top: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+`
+
+const ContainerInputDate = styled.View`
+    margin-top: 16px;
+    width: 87.80%;
+`
 
 interface FormDestinationProps {
     originAirport: Airport | null;
@@ -57,35 +89,5 @@ const FormDestination: React.FC<FormDestinationProps> = ({
         </>
     )
 }
-
-const RowInputs = styled.View`
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 87.80%;
-    margin-top: 35px;
-`
-const ButtonContainer = styled.View`
-    width: 87.80%;
-    margin-top: 20px;
-`
-const LegendContainer = styled.View`
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-`
-
-const LegendRow = styled.View`
-    flex-direction: row;
-    margin-top: 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-`
-
-const ContainerInputDate = styled.View`
-    margin-top: 16px;
-    width: 87.80%;
-`
 
 export default FormDestination
