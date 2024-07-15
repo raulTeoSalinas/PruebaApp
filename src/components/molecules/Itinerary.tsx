@@ -70,6 +70,8 @@ const RowItinerary = styled.View`
     justify-content: space-between;
     align-items: center;
     width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
 `
 
 const ContainerFlightCourse = styled.View`
@@ -100,10 +102,10 @@ const DashedLine = styled(View) <{ status: string }>`
     flex: ${(props) =>
         props.status === 'ARRIVED'
             ? 0
-            : props.status === 'ON-TIME'
-                ? 0.8
+            : props.status === 'ON_TIME'
+                ? 30
                 : props.status === 'DELAYED'
-                    ? 0.8
+                    ? 30
                     : props.status === 'IN-THE-AIR'
                         ? 0.3
                         : 0};

@@ -24,22 +24,37 @@ const TrackFlightScreen: React.FC<TrackFlightScreenProps> = (props) => {
 
     const { navigation } = props;
 
+    const [isValidated, setIsValidated] = useState(true)
+
     const navigateFLScreenByNumber = () => {
-        navigation.navigate("FlightsListingScreen", {
-            departureDate: departureDate,
-            flightNumber: flightNumber,
-            destinationAirport: null,
-            originAirport: null,
-        })
+        if (departureDate != null && flightNumber != "") {
+            setIsValidated(true);
+            navigation.navigate("FlightsListingScreen", {
+                departureDate: departureDate,
+                flightNumber: flightNumber,
+                destinationAirport: null,
+                originAirport: null,
+            })
+        } else {
+            setIsValidated(false)
+        }
+
     }
 
     const navigateFLScreenByDestination = () => {
-        navigation.navigate("FlightsListingScreen", {
-            departureDate: departureDate,
-            flightNumber: null,
-            destinationAirport: destinationAirport,
-            originAirport: originAirport,
-        })
+
+        if (departureDate != null && destinationAirport != null && originAirport != null) {
+            setIsValidated(true);
+            navigation.navigate("FlightsListingScreen", {
+                departureDate: departureDate,
+                flightNumber: null,
+                destinationAirport: destinationAirport,
+                originAirport: originAirport,
+            })
+        } else {
+            setIsValidated(false)
+        }
+
     }
 
     const [originAirport, setOriginAirport] = useState<Airport | null>(null);
@@ -85,6 +100,9 @@ const TrackFlightScreen: React.FC<TrackFlightScreenProps> = (props) => {
                             navigateFLScreen={navigateFLScreenByDestination}
                         />
                     )
+                }
+                {
+                    !isValidated && <Text color="error" style={{ marginTop: "2%" }}>Please fill in all the required fields.</Text>
                 }
 
 

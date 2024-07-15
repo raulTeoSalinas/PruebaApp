@@ -6,8 +6,8 @@ import { Icon, Text, TextButton, CardFlightStatus } from "../components"
 import { ScrollView, TouchableOpacity, View } from "react-native"
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from "../redux/store"
-import { fetchFlightStatusByAirportsAndDate, fetchFlightStatusByFlightCode } from "../redux/flightsSlice"
-
+import { fetchFlightStatusByAirportsAndDate, fetchFlightStatusByFlightCode, addFavorite, removeFavorite } from "../redux/flightsSlice"
+import { FlightStatus } from "../models/FlightStatus"
 
 type FlightsListingScreenProps = NativeStackScreenProps<RootStackParamList, "FlightsListingScreen">
 
@@ -17,28 +17,61 @@ const FlightsListingScreen: React.FC<FlightsListingScreenProps> = (props) => {
     const { navigation } = props;
 
     const dispatch = useDispatch<AppDispatch>();
-    const { flightStatusCollection, loading, error } = useSelector((state: RootState) => state.flights);
+    const { flightStatusCollection, loading, error, favorites } = useSelector((state: RootState) => state.flights);
 
+    const formatDate = (dateToFormat: string) => {
+        // Create a Date object with the local time zone to avoid mismatches       
+        const [year, month, day] = dateToFormat.split('-').map(Number);
+        const date = new Date(year, month - 1, day);
 
+        // Convert the date to the time zone and format it
+        const options: Intl.DateTimeFormatOptions = {
+            timeZone: 'America/Mexico_City',
+            weekday: 'long',
+            month: 'short',
+            day: 'numeric'
+        };
+        const formattedDate = date.toLocaleDateString('en-US', options)
+
+        return formattedDate
+    }
 
     const handleFetchByFlightCode = () => {
         dispatch(fetchFlightStatusByFlightCode({
-            flightCode: "500",
-            date: "2023-11-21"
+            flightCode: flightNumber!,
+            date: departureDate!
         }));
     };
 
     const handleFetchByAirportsAndDate = () => {
         dispatch(fetchFlightStatusByAirportsAndDate({
-            departureAirport: "MEX",
-            arrivalAirport: "CUN",
-            date: "2023-11-21"
+            departureAirport: originAirport?.code!,
+            arrivalAirport: destinationAirport?.code!,
+            date: departureDate!
         }));
     };
 
+    const handleAddFavorite = (flight: FlightStatus) => {
+        dispatch(addFavorite(flight));
+    };
+
+    const handleRemoveFavorite = (segmentCode: string) => {
+        dispatch(removeFavorite(segmentCode));
+    };
+
     useEffect(() => {
-        handleFetchByAirportsAndDate()
-    }, []);
+
+        if (flightNumber) {
+            handleFetchByFlightCode()
+        } else {
+            handleFetchByAirportsAndDate()
+        }
+
+    }, [flightNumber]);
+
+    const flightsToDisplay = [...favorites, ...flightStatusCollection.filter(
+        flight => !favorites.some(fav => fav.segment.segmentCode === flight.segment.segmentCode)
+    )];
 
     return (
         <Container>
@@ -49,9 +82,18 @@ const FlightsListingScreen: React.FC<FlightsListingScreenProps> = (props) => {
                     </TouchableOpacity>
 
                     <ColumnHeader>
-                        <Text bold size="extraHuge" >AM {flightNumber}</Text>
+                        {flightNumber ? (
+                            <Text bold size="extraHuge" >AM {flightNumber}</Text>
+                        ) : (
+                            <RowDate>
+                                <Text bold size="extraHuge" >{originAirport?.code} </Text>
+                                <Icon width={20} height={10} name="arrowRight2" />
+                                <Text bold size="extraHuge" > {destinationAirport?.code}</Text>
+                            </RowDate>
+                        )}
+
                         <RowDate>
-                            <Text>{departureDate}</Text>
+                            <Text>{formatDate(departureDate!)}</Text>
                             <Separator />
                             <Icon name="calendar" width={14} height={14} />
                             <TextButton onPress={() => navigation.goBack()} style={{ marginLeft: 6 }}>Change</TextButton>
@@ -60,13 +102,13 @@ const FlightsListingScreen: React.FC<FlightsListingScreenProps> = (props) => {
 
                 </RowHeader>
                 <RowHeader style={{ marginTop: 32, marginBottom: 8 }}>
-                    <Text size="small" bold>Mexico to Cancún</Text>
+                    <Text size="small" bold>{flightStatusCollection.length < 1 ? "Please try with different inputs" : "Mexico to Cancún"}</Text>
                     <Text size="small" color="textLight2">{flightStatusCollection.length} {flightStatusCollection.length == 1 ? "result" : "results"}</Text>
                 </RowHeader>
             </Header>
-            <ScrollView contentContainerStyle={{ width: "100%", flexGrow: 1, gap: 20 }}>
-                {flightStatusCollection.map((flight, index) => (
-                    <CardFlightStatus key={index} flightStatus={flight} />
+            <ScrollView contentContainerStyle={{ width: "100%", flexGrow: 1, gap: 20, paddingBottom: 50 }}>
+                {flightsToDisplay.map((flight, index) => (
+                    <CardFlightStatus addFavorites={handleAddFavorite} removeFavorites={handleRemoveFavorite} favorites={favorites} key={index} flightStatus={flight} />
                 ))}
             </ScrollView>
         </Container>

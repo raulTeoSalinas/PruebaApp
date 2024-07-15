@@ -20,7 +20,7 @@ type InputDateProps = {
 const InputDate: React.FC<InputDateProps> = ({ date, setDate, description, size = "regular" }) => {
 
     // Hook for using Input Location
-    const { presentRef, snapPoints, handleOpenModal, handleSelectDate } = useInputDate(setDate)
+    const { presentRef, snapPoints, handleOpenModal, handleSelectDate, formatDate } = useInputDate(setDate)
 
     // Subcomponent Modal
     const Modal = () => (
@@ -54,7 +54,7 @@ const InputDate: React.FC<InputDateProps> = ({ date, setDate, description, size 
                     <Text size="tiny">{`Date of ${description}`}</Text>
                     {date ? (
 
-                        <Text bold>{date}</Text>
+                        <Text bold>{formatDate(date)}</Text>
 
                     ) : (
                         <Text color="textLight">Choose...</Text>

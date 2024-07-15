@@ -70,6 +70,7 @@ const FlightDetailScreen: React.FC<FlightsListingScreenProps> = (props) => {
                 </RowHeader>
                 <ContainerItinerary>
                     <Itinerary flightStatus={flightStatus} />
+
                 </ContainerItinerary>
                 <Text style={{ marginLeft: "5%", marginVertical: "4%" }} bold size="large">Flight Details</Text>
                 <Row style={{ marginHorizontal: "5%" }}>
@@ -175,18 +176,6 @@ const FlagStatus = styled.View <{ status: string }>`
     padding: 8px 10px;
 `
 
-const ContainerItinerary = styled.View`
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    margin-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-
-    border-bottom-width: 1px;
-    border-color: ${(props) => props.theme.colors.border} ;
-`
-
 const RowDetail = styled.View`
     flex-direction: row;
     justify-content: flex-start;
@@ -203,4 +192,10 @@ const ColumnDetail = styled.View`
     justify-content: flex-start;
     align-items: flex-start;
 
+`
+
+const ContainerItinerary = styled.View`
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 `

@@ -19,9 +19,12 @@ type FlightDetailScreenNavigationProp = NativeStackNavigationProp<
 
 type CardFlightStatusProps = {
     flightStatus: FlightStatus;
+    favorites: FlightStatus[];
+    addFavorites: (flight: FlightStatus) => void;
+    removeFavorites: (segmentCod: string) => void;
 }
 
-const CardFlightStatus: React.FC<CardFlightStatusProps> = ({ flightStatus }) => {
+const CardFlightStatus: React.FC<CardFlightStatusProps> = ({ flightStatus, favorites, addFavorites, removeFavorites }) => {
 
     const capitalizeFirstLetter = (str: string) => {
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -36,6 +39,15 @@ const CardFlightStatus: React.FC<CardFlightStatusProps> = ({ flightStatus }) => 
         })
     }
 
+    const isFavorite = favorites.some(fav => fav.segment.segmentCode === flightStatus.segment.segmentCode);
+
+    const handlePressKnob = () => {
+        if (isFavorite) {
+            removeFavorites(flightStatus.segment.segmentCode)
+        } else {
+            addFavorites(flightStatus)
+        }
+    }
 
     return (
         <Container>
@@ -45,7 +57,7 @@ const CardFlightStatus: React.FC<CardFlightStatusProps> = ({ flightStatus }) => 
                 </FlagStatus>
                 <ContainerKnob>
                     <Text bold size="extraSmall">Favorite</Text>
-                    <Knob isActive={false} />
+                    <Knob onPress={handlePressKnob} isActive={isFavorite} />
                 </ContainerKnob>
             </Row>
 
