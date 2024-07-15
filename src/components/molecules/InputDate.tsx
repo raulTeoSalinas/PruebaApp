@@ -73,8 +73,8 @@ const InputDate: React.FC<InputDateProps> = ({ date, setDate, description, size 
 const Container = styled.TouchableOpacity.attrs({
     activeOpacity: 0.8,
 }) <{ size: "large" | "regular" }>`
-    width: ${({ size }) => (size === "large" ? '360px' : '215px')};
-    padding: 15px;
+    width: ${({ size }) => (size === "large" ? '100%' : '63%')};
+    padding: 10px;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;

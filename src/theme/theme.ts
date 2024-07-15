@@ -5,10 +5,12 @@ export const theme = {
         backgroundContrast: "#F7F7F7",
         border: "#CCCCCC",
         textLight: "#0000004d",
+        textLight2: "#000000b3",
         knobUnactive: "#D6D6D6",
         statusInTheAir: "#1872B3",
         statusOnTime: "#2E9509",
         statusDelayed: "#FECB2F",
+
     },
     fonts: {
         regular: "Garnett-Regular",
