@@ -6,30 +6,31 @@ import PlaneDeparture from "../../assets/icons/planeDeparture.svg";
 import PlaneStatus from "../../assets/icons/planeStatus.svg";
 import { ThemeType, theme } from "../../theme/theme";
 import React from "react";
-import { View, Text, } from 'react-native'
+import { ViewStyle } from 'react-native'
 
 type IconProps = {
     name: string;
     color?: keyof ThemeType['colors'];
     width: number;
-    height: number
+    height: number;
+    style?: ViewStyle
 }
 
-const Icon: React.FC<IconProps> = ({ name, color = "primary", width = 15, height = 15 }) => {
+const Icon: React.FC<IconProps> = ({ name, color = "primary", width = 15, height = 15, style }) => {
 
     switch (name) {
         case "calendar":
-            return <Calendar color={theme.colors[color]} width={width} height={height} />;
+            return <Calendar style={style} color={theme.colors[color]} width={width} height={height} />;
         case "arrowLeft":
-            return <ArrowLeft color={theme.colors[color]} width={width} height={height} />;
+            return <ArrowLeft style={style} color={theme.colors[color]} width={width} height={height} />;
         case "arrowRight":
-            return <ArrowRight color={theme.colors[color]} width={width} height={height} />;
+            return <ArrowRight style={style} color={theme.colors[color]} width={width} height={height} />;
         case "planeArrival":
-            return <PlaneArrival color={theme.colors[color]} width={width} height={height} />;
+            return <PlaneArrival style={style} color={theme.colors[color]} width={width} height={height} />;
         case "planeDeparture":
-            return <PlaneDeparture color={theme.colors[color]} width={width} height={height} />;
+            return <PlaneDeparture style={style} color={theme.colors[color]} width={width} height={height} />;
         case "planeStatus":
-            return <PlaneStatus color={theme.colors[color]} width={width} height={height} />;
+            return <PlaneStatus style={style} color={theme.colors[color]} width={width} height={height} />;
         default:
             return null;
     }

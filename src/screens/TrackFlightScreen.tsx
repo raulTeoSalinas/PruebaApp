@@ -56,7 +56,7 @@ const TrackFlightScreen: React.FC<TrackFlightScreenProps> = (props) => {
 
             <Container>
                 <Header>
-                    <Text style={{ marginTop: 40 }} bold size="extraLarge">Track your flight</Text>
+                    <Text style={{ marginTop: 40 }} bold size="huge">Track your flight</Text>
                     <Text>Keep you informed in real time!</Text>
                 </Header>
                 <ToggleContainer>

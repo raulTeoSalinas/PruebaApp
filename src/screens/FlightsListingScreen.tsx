@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { RootStackParamList } from "../../App"
 import styled from "styled-components/native"
-import { Icon, Text, TextButton } from "../components"
-import { TouchableOpacity, View } from "react-native"
+import { Icon, Text, TextButton, CardFlightStatus } from "../components"
+import { ScrollView, TouchableOpacity, View } from "react-native"
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from "../redux/store"
 import { fetchFlightStatusByAirportsAndDate, fetchFlightStatusByFlightCode } from "../redux/flightsSlice"
+
 
 type FlightsListingScreenProps = NativeStackScreenProps<RootStackParamList, "FlightsListingScreen">
 
@@ -34,7 +35,7 @@ const FlightsListingScreen: React.FC<FlightsListingScreenProps> = (props) => {
     };
 
     useEffect(() => {
-        handleFetchByFlightCode();
+        handleFetchByAirportsAndDate()
     }, []);
 
     return (
@@ -46,7 +47,7 @@ const FlightsListingScreen: React.FC<FlightsListingScreenProps> = (props) => {
                     </TouchableOpacity>
 
                     <ColumnHeader>
-                        <Text bold size="huge" >AM {flightNumber}</Text>
+                        <Text bold size="extraHuge" >AM {flightNumber}</Text>
                         <RowDate>
                             <Text>{departureDate}</Text>
                             <Separator />
@@ -61,14 +62,11 @@ const FlightsListingScreen: React.FC<FlightsListingScreenProps> = (props) => {
                     <Text size="small" color="textLight2">{flightStatusCollection.length} {flightStatusCollection.length == 1 ? "result" : "results"}</Text>
                 </RowHeader>
             </Header>
-            {flightStatusCollection.map((flight, index) => (
-                <View key={index}>
-                    <Text>Flight Status: {flight.status}</Text>
-                    <Text>Departure: {flight.segment.departureAirport}</Text>
-                    <Text>Arrival: {flight.segment.arrivalAirport}</Text>
-                    {/* Otros detalles del vuelo */}
-                </View>
-            ))}
+            <ScrollView contentContainerStyle={{ width: "100%" }}>
+                {flightStatusCollection.map((flight, index) => (
+                    <CardFlightStatus key={index} flightStatus={flight} />
+                ))}
+            </ScrollView>
         </Container>
     )
 }
@@ -97,7 +95,6 @@ const RowHeader = styled.View`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    /* height: 100%; */
 
 `;
 
