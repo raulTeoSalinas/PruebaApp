@@ -1,7 +1,9 @@
+// React
 import { useState } from "react";
+// External Dependencies
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+// Internal Dependencies
 import { RootStackParamList } from "../../App";
-
 import { Airport } from "../models/Airport";
 
 type useTrackFlightScreenProps = {
@@ -50,9 +52,6 @@ const useTrackFlightScreen = (prop: useTrackFlightScreenProps) => {
         }
 
     }
-
-
-
 
     return {
         isByFlightNumber,

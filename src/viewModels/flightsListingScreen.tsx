@@ -1,8 +1,11 @@
+// React
+import { useEffect } from "react";
+// External Dependencies
 import { useDispatch, useSelector } from 'react-redux';
+// Internal Dependencies
 import { RootState, AppDispatch } from "../redux/store"
 import { fetchFlightStatusByAirportsAndDate, fetchFlightStatusByFlightCode, addFavorite, removeFavorite } from "../redux/flightsSlice"
 import { FlightStatus } from "../models/FlightStatus"
-import React, { useEffect } from "react";
 import { Airport } from "../models/Airport";
 
 type useFlightsListingScreenProps = {

@@ -1,10 +1,59 @@
-import React, { useEffect } from 'react'
-import { NativeStackScreenProps } from "@react-navigation/native-stack"
-import { RootStackParamList } from "../../App"
+// React
+import React from 'react'
+// React Native
+import { ScrollView, TouchableOpacity } from "react-native"
+// External Dependencies
 import styled from "styled-components/native"
+import { NativeStackScreenProps } from "@react-navigation/native-stack"
+// Internal Dependencies
+import { RootStackParamList } from "../../App"
 import { Icon, Text, TextButton, CardFlightStatus } from "../components"
-import { ScrollView, TouchableOpacity, View } from "react-native"
 import useFlightsListingScreen from "../viewModels/flightsListingScreen"
+
+
+const Container = styled.View`
+    flex: 1;
+    justify-content: start;
+    align-items: center;
+    background-color: ${props => props.theme.colors.background};
+
+`;
+
+
+const Header = styled.View`
+    justify-content: flex-end;
+    align-items: center;
+    height: 200px;
+    width: 87.80%;
+`;
+
+const RowHeader = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+`;
+
+const ColumnHeader = styled.View`
+    justify-content: center;
+    align-items: flex-end;
+    background-color: ${props => props.theme.colors.background};
+`;
+
+const RowDate = styled.View`
+    flex-direction: row;
+    align-items: center;
+    margin-top: 4px;
+`
+const Separator = styled.View`
+    height: 20px;
+    background-color: ${props => props.theme.colors.border};
+    width: 2px;
+    margin-left: 8px;
+    margin-right: 8px;
+`
+
 
 type FlightsListingScreenProps = NativeStackScreenProps<RootStackParamList, "FlightsListingScreen">
 
@@ -76,47 +125,3 @@ const FlightsListingScreen: React.FC<FlightsListingScreenProps> = (props) => {
 }
 
 export default FlightsListingScreen;
-
-
-const Container = styled.View`
-    flex: 1;
-    justify-content: start;
-    align-items: center;
-    background-color: ${props => props.theme.colors.background};
-
-`;
-
-
-const Header = styled.View`
-    justify-content: flex-end;
-    align-items: center;
-    height: 200px;
-    width: 87.80%;
-`;
-
-const RowHeader = styled.View`
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-
-`;
-
-const ColumnHeader = styled.View`
-    justify-content: center;
-    align-items: flex-end;
-    background-color: ${props => props.theme.colors.background};
-`;
-
-const RowDate = styled.View`
-    flex-direction: row;
-    align-items: center;
-    margin-top: 4px;
-`
-const Separator = styled.View`
-    height: 20px;
-    background-color: ${props => props.theme.colors.border};
-    width: 2px;
-    margin-left: 8px;
-    margin-right: 8px;
-`

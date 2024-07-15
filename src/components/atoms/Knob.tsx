@@ -1,23 +1,9 @@
-
+// React
 import React from 'react'
+// React Native
 import { TouchableOpacity } from "react-native"
-
+// External Depencencies
 import styled from "styled-components/native"
-
-type KnobProps = {
-  isActive: boolean,
-  onPress: () => void
-}
-
-const Knob: React.FC<KnobProps> = ({ isActive, onPress }) => {
-  return (
-    <Container onPress={onPress} isActive={isActive}>
-      <Circle />
-    </Container>
-  )
-}
-
-export default Knob;
 
 const Container = styled(TouchableOpacity) <{ isActive: boolean }>`
   background-color: ${(props) =>
@@ -40,3 +26,20 @@ const Circle = styled.View`
   width: 18px;
   border-radius: 9px;
 `
+
+type KnobProps = {
+  isActive: boolean,
+  onPress: () => void
+}
+
+const Knob: React.FC<KnobProps> = ({ isActive, onPress }) => {
+  return (
+    <Container onPress={onPress} isActive={isActive}>
+      <Circle />
+    </Container>
+  )
+}
+
+export default Knob;
+
+

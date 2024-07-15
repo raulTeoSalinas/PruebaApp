@@ -1,49 +1,12 @@
+// React
+import { useRef } from "react";
+// React Native
+import { TextInput } from "react-native";
+// External Dependencies
 import styled from "styled-components/native"
+// Internal Dependencies
 import { theme } from "../../theme/theme";
 import Text from "../atoms/Text";
-import { useRef } from "react";
-import { Airport } from "../../models/Airport";
-import { TouchableOpacity, BottomSheetModal } from '@gorhom/bottom-sheet';
-import { TextInput } from "react-native";
-
-// Type definition
-type InputFlightNumberProps = {
-    flightNumber: string;
-    setFlightNumber: (flightNumber: string) => void;
-
-}
-
-// Component definition
-const InputFlightNumber: React.FC<InputFlightNumberProps> = ({ flightNumber, setFlightNumber }) => {
-
-
-
-    const numericInputRef = useRef<TextInput>(null);
-
-    const handleTextChange = (text: string) => {
-        const numericText = text.replace(/[^0-9]/g, '');
-        setFlightNumber(numericText);
-    };
-
-    // Location input
-    return (
-        <>
-            <Container onPress={() => numericInputRef.current?.focus()}>
-                <Text size="tiny">Flight Number</Text>
-                <Row>
-                    <Text color="textLight" bold>AM</Text>
-                    <NumericInput
-                        ref={numericInputRef}
-                        value={flightNumber}
-                        onChangeText={handleTextChange}
-                    />
-                </Row>
-            </Container>
-
-        </>
-    )
-}
-
 
 // Styled Components
 const Container = styled.TouchableOpacity.attrs({
@@ -77,5 +40,41 @@ const NumericInput = styled.TextInput.attrs({
     color: ${theme.colors.primary};
     width: 100%;
 `;
+
+// Type definition
+type InputFlightNumberProps = {
+    flightNumber: string;
+    setFlightNumber: (flightNumber: string) => void;
+
+}
+
+// Component definition
+const InputFlightNumber: React.FC<InputFlightNumberProps> = ({ flightNumber, setFlightNumber }) => {
+
+    const numericInputRef = useRef<TextInput>(null);
+
+    const handleTextChange = (text: string) => {
+        const numericText = text.replace(/[^0-9]/g, '');
+        setFlightNumber(numericText);
+    };
+
+    // Location input
+    return (
+        <>
+            <Container onPress={() => numericInputRef.current?.focus()}>
+                <Text size="tiny">Flight Number</Text>
+                <Row>
+                    <Text color="textLight" bold>AM</Text>
+                    <NumericInput
+                        ref={numericInputRef}
+                        value={flightNumber}
+                        onChangeText={handleTextChange}
+                    />
+                </Row>
+            </Container>
+
+        </>
+    )
+}
 
 export default InputFlightNumber;

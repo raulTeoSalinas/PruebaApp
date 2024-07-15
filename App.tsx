@@ -1,18 +1,21 @@
+// React
 import { useEffect } from "react";
+// External Dependencies
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
-import ThemeProvider from "./src/theme/ThemeProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from "react-redux";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// Internal Dependencies
+import ThemeProvider from "./src/theme/ThemeProvider";
 import {
   TrackFlightScreen,
   FlightsListingScreen,
   FlightDetailScreen
 } from "./src/screens";
-import { NavigationContainer } from '@react-navigation/native';
-import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Airport } from "./src/models/Airport";
 import { FlightStatus } from "./src/models/FlightStatus";
 
@@ -36,6 +39,22 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 
+const StackNavigation = () => {
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{
+        headerShown: false
+      }}>
+        <Stack.Screen name="TrackFlightScreen" component={TrackFlightScreen} />
+        <Stack.Screen name="FlightsListingScreen" component={FlightsListingScreen} />
+        <Stack.Screen name="FlightDetailScreen" component={FlightDetailScreen} />
+
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
+
 const App = () => {
 
   const [loaded, error] = useFonts({
@@ -57,23 +76,10 @@ const App = () => {
     <ThemeProvider>
       <Provider store={store}>
         <GestureHandlerRootView>
-
-
           <StatusBar style="auto" />
-          <NavigationContainer>
-            <Stack.Navigator screenOptions={{
-              headerShown: false
-            }}>
-              <Stack.Screen name="TrackFlightScreen" component={TrackFlightScreen} />
-              <Stack.Screen name="FlightsListingScreen" component={FlightsListingScreen} />
-              <Stack.Screen name="FlightDetailScreen" component={FlightDetailScreen} />
-
-            </Stack.Navigator>
-          </NavigationContainer>
-
+          <StackNavigation />
         </GestureHandlerRootView>
       </Provider>
-
     </ThemeProvider >
   );
 }

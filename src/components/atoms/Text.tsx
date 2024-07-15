@@ -1,4 +1,6 @@
+// External Dependencies
 import styled from "styled-components/native"
+// Internal Dependencies
 import { theme, ThemeType } from "../../theme/theme";
 
 
@@ -14,8 +16,7 @@ const Text = styled.Text<TextProps>`
   color: ${(props) => (props.color ? theme.colors[props.color] : theme.colors.primary)};
   font-family: ${(props) => (props.bold ? theme.fonts.semiBold : theme.fonts.regular)};
   text-align: ${(props) => props.textAlign || 'left'};
-
-  `;
+`;
 
 export default Text;
 

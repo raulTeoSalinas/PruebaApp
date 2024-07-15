@@ -1,13 +1,40 @@
-import { useRef, useMemo } from "react";
-import styled from "styled-components/native"
+// External Dependencies
+import styled from "styled-components/native";
+import { TouchableOpacity, BottomSheetModal } from '@gorhom/bottom-sheet';
+import { Calendar } from "react-native-calendars";
+// Internal Dependencies
 import { theme } from "../../theme/theme";
 import Text from "../atoms/Text";
-import { Airport } from "../../models/Airport";
-import { TouchableOpacity, BottomSheetModal } from '@gorhom/bottom-sheet';
-import useInputDate from "../../viewModels/inputDate";
-import { Calendar } from "react-native-calendars";
-
 import Icon from "../atoms/Icon";
+import useInputDate from "../../viewModels/inputDate";
+
+// Styled Components
+const Container = styled.TouchableOpacity.attrs({
+    activeOpacity: 0.8,
+}) <{ size: "large" | "regular" }>`
+    width: ${({ size }) => (size === "large" ? '100%' : '63%')};
+    padding: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 64px;
+    border-radius: 12px;
+    border: 2px solid ${(props) => props.theme.colors.primary};
+  `;
+
+const Column = styled.View`
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    height: 100%;
+`
+
+const AirportSelect = styled(TouchableOpacity)`
+    padding: 8px 10px;
+    border-bottom-width: 1px;
+    border-color: ${(props) => props.theme.colors.border};
+`
+
 // Type definition
 type InputDateProps = {
     date: string | null;
@@ -68,40 +95,6 @@ const InputDate: React.FC<InputDateProps> = ({ date, setDate, description, size 
         </>
     )
 }
-
-
-// Styled Components
-const Container = styled.TouchableOpacity.attrs({
-    activeOpacity: 0.8,
-}) <{ size: "large" | "regular" }>`
-    width: ${({ size }) => (size === "large" ? '100%' : '63%')};
-    padding: 10px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    height: 64px;
-    border-radius: 12px;
-    border: 2px solid ${(props) => props.theme.colors.primary};
-  `;
-
-const Column = styled.View`
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    height: 100%;
-`
-
-
-const LocationRow = styled.View`
-    flex-direction: row;
-    gap: 6px;
-`
-
-const AirportSelect = styled(TouchableOpacity)`
-    padding: 8px 10px;
-    border-bottom-width: 1px;
-    border-color: ${(props) => props.theme.colors.border};
-`
 
 export default InputDate;
 

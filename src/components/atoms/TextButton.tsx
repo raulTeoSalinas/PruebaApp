@@ -1,9 +1,10 @@
+// React
 import React from "react";
+// React Native
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
-import styled from "styled-components/native";
+// Internal Dependencies
 import Text from "./Text";
-import { theme, ThemeType } from "../../theme/theme";
-
+import { ThemeType } from "../../theme/theme";
 
 
 interface TextButtonProps extends TouchableOpacityProps {
@@ -14,8 +15,8 @@ interface TextButtonProps extends TouchableOpacityProps {
 
 const TextButton: React.FC<TextButtonProps> = ({
     children,
-    textColor = "primary", // Default value
-    textSize = "medium", // Default value
+    textColor = "primary",
+    textSize = "medium",
     bold,
     ...restProps
 }) => {
