@@ -67,8 +67,8 @@ const InputLocation: React.FC<InputLocationProps> = ({ airport, setAirport, desc
 const Container = styled.TouchableOpacity.attrs({
     activeOpacity: 0.8,
 })`
-    width: 172.5px;
-    padding: 15px;
+    width: 49%;
+    padding: 10px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;

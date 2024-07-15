@@ -49,8 +49,8 @@ const InputFlightNumber: React.FC<InputFlightNumberProps> = ({ flightNumber, set
 const Container = styled.TouchableOpacity.attrs({
     activeOpacity: 0.8,
 })`
-    width: 172.5px;
-    padding: 15px;
+    width: 31.71%;
+    padding: 10px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
@@ -66,7 +66,8 @@ const Row = styled.View`
 `
 
 const NumericInput = styled.TextInput.attrs({
-    keyboardType: 'numeric',
+    keyboardType: "numeric",
+    placeholder: "000",
     placeholderTextColor: theme.colors.textLight,
     maxLength: 3,
     textAlignVertical: "top"
@@ -74,7 +75,7 @@ const NumericInput = styled.TextInput.attrs({
     font-family: ${theme.fonts.semiBold};
     font-size: ${theme.fontSizes.medium}px;
     color: ${theme.colors.primary};
-
+    width: 100%;
 `;
 
 export default InputFlightNumber;

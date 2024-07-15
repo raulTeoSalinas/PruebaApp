@@ -6,3 +6,7 @@ export { default as TextButton } from "./atoms/TextButton"
 export { default as InputLocation } from "./molecules/InputLocation"
 export { default as InputDate } from "./molecules/InputDate"
 export { default as InputFlightNumber } from "./molecules/InputFlightNumber"
+export { default as ToggleBook } from "./molecules/ToggleBook"
+
+export { default as FormFlightNumber } from "./templates/FormFlightNumber"
+export { default as FormDestination } from "./templates/FormDestination"

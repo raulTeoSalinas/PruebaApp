@@ -10,7 +10,7 @@ const useInputLocation = (setAirport: (airport: Airport | null) => void) => {
     const presentRef = useRef<BottomSheetModal>(null);
 
     // Memoized snap points for Present modal
-    const snapPoints = useMemo(() => ["40%", '80%'], []);
+    const snapPoints = useMemo(() => ["50%", '80%'], []);
 
     // Function to close the Present modal.
     const closeModal = () => presentRef.current?.close();

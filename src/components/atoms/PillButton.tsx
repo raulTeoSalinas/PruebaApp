@@ -44,7 +44,7 @@ const StyledTouchableOpacity = styled(TouchableOpacity) <StyledTouchableOpacityP
     background-color: ${(props) => theme.colors[props.backgroundColor]};
     padding: ${(props) => getPadding(props.size)};
     border-radius: ${(props) => getBorderRadius(props.size)};
-    width: ${(props) => getWidth(props.size)};
+    max-width: ${(props) => getWidth(props.size)};
     justify-content: center;
     align-items: center;
   `;
@@ -55,7 +55,7 @@ const getPadding = (size: PillButtonProps["size"]) => {
         case "regular":
             return "7px 15px";
         case "large":
-            return "24px 24px";
+            return "18px 24px";
         default:
             return "7px 15px"; // Default value
     }
@@ -77,7 +77,7 @@ const getWidth = (size: PillButtonProps["size"]) => {
         case "regular":
             return "136px";
         case "large":
-            return "360px";
+            return "100%";
         default:
             return "136px"; // Default value
     }
