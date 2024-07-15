@@ -11,6 +11,8 @@ import {
     Itinerary
 } from "../components"
 
+import useFlightDetailScreen from "../viewModels/flightDetailScreen"
+
 type FlightsListingScreenProps = NativeStackScreenProps<RootStackParamList, "FlightDetailScreen">
 
 
@@ -20,29 +22,7 @@ const FlightDetailScreen: React.FC<FlightsListingScreenProps> = (props) => {
 
     const { navigation } = props;
 
-    const snapPoints = useMemo(() => ['60%', '80%'], []);
-
-    const capitalizeFirstLetter = (str: string) => {
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    };
-
-    const formatDate = (dateString: string) => {
-
-        const date = new Date(dateString);
-
-        // Convert the date to the time zone and format it
-        const options: Intl.DateTimeFormatOptions = {
-            timeZone: 'America/Mexico_City',
-            weekday: 'long',
-            month: 'short',
-            day: 'numeric'
-        };
-        const formattedDate = date.toLocaleDateString('en-US', options);
-
-        return formattedDate
-
-    };
-
+    const { snapPoints, formatDate, capitalizeFirstLetter } = useFlightDetailScreen()
 
     return (
         <Container>

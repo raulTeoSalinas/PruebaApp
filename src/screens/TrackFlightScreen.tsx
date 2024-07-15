@@ -17,54 +17,29 @@ import styled from "styled-components/native"
 import { useNavigation } from "@react-navigation/native"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { RootStackParamList } from "../../App"
+import useTrackFlightScreen from "../viewModels/trackFlightScreen"
 
 type TrackFlightScreenProps = NativeStackScreenProps<RootStackParamList, "TrackFlightScreen">
 
 const TrackFlightScreen: React.FC<TrackFlightScreenProps> = (props) => {
 
-    const { navigation } = props;
+    const {
+        isByFlightNumber,
+        isValidated,
+        setIsByFlightNumber,
+        departureDate,
+        setDepartureDate,
+        flightNumber,
+        setFlightNumber,
+        navigateFLScreenByDestination,
+        navigateFLScreenByNumber,
+        originAirport,
+        setOriginAirport,
+        destinationAirport,
+        setDestinationAirport,
+        airports
+    } = useTrackFlightScreen({ prop: props })
 
-    const [isValidated, setIsValidated] = useState(true)
-
-    const navigateFLScreenByNumber = () => {
-        if (departureDate != null && flightNumber != "") {
-            setIsValidated(true);
-            navigation.navigate("FlightsListingScreen", {
-                departureDate: departureDate,
-                flightNumber: flightNumber,
-                destinationAirport: null,
-                originAirport: null,
-            })
-        } else {
-            setIsValidated(false)
-        }
-
-    }
-
-    const navigateFLScreenByDestination = () => {
-
-        if (departureDate != null && destinationAirport != null && originAirport != null) {
-            setIsValidated(true);
-            navigation.navigate("FlightsListingScreen", {
-                departureDate: departureDate,
-                flightNumber: null,
-                destinationAirport: destinationAirport,
-                originAirport: originAirport,
-            })
-        } else {
-            setIsValidated(false)
-        }
-
-    }
-
-    const [originAirport, setOriginAirport] = useState<Airport | null>(null);
-    const [destinationAirport, setDestinationAirport] = useState<Airport | null>(null);
-
-    const airports: Airport[] = [{ city: "Mexico City", code: "MEX" }, { city: "Cancún", code: "CUN" }]
-
-    const [departureDate, setDepartureDate] = useState<string | null>(null);
-    const [flightNumber, setFlightNumber] = useState<string>("");
-    const [isByFlightNumber, setIsByFlightNumber] = useState<boolean>(true);
 
     return (
         <BottomSheetModalProvider>
