@@ -2,7 +2,7 @@ import styled from "styled-components/native"
 import { theme, ThemeType } from "../../theme/theme";
 
 
-export type TextProps = {
+type TextProps = {
   size?: keyof ThemeType['fontSizes'];
   color?: keyof ThemeType['colors'];
   bold?: boolean,

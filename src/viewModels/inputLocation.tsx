@@ -1,13 +1,13 @@
-import { useMemo, useRef } from "react";
-import BottomSheet from '@gorhom/bottom-sheet';
+import { useMemo, useRef, useCallback } from "react";
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { Airport } from "../models/Airport";
 
 // Custom hook to manage airport selection and Present modal interactions.
 
-const useInputLocation = (airport: Airport | null, setAirport: (airport: Airport | null) => void) => {
+const useInputLocation = (setAirport: (airport: Airport | null) => void) => {
 
     // Ref for Modal
-    const presentRef = useRef<BottomSheet>(null);
+    const presentRef = useRef<BottomSheetModal>(null);
 
     // Memoized snap points for Present modal
     const snapPoints = useMemo(() => ["40%", '80%'], []);
@@ -16,7 +16,9 @@ const useInputLocation = (airport: Airport | null, setAirport: (airport: Airport
     const closeModal = () => presentRef.current?.close();
 
     // Function to open the Present modal.
-    const handleOpenModal = () => presentRef.current?.snapToIndex(0);
+    const handleOpenModal = useCallback(() => {
+        presentRef.current?.present();
+    }, []);
 
     /**
      * Handler function when an airport is selected.

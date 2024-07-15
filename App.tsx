@@ -7,6 +7,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   TrackFlightScreen
 } from "./src/screens";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -30,10 +31,14 @@ const App = () => {
   return (
     <ThemeProvider>
       <GestureHandlerRootView>
+
+
         <StatusBar style="auto" />
         <TrackFlightScreen />
+
       </GestureHandlerRootView>
-    </ThemeProvider>
+
+    </ThemeProvider >
   );
 }
 

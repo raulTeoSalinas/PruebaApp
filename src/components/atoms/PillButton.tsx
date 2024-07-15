@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import styled from "styled-components/native";
-import Text, { TextProps } from "./Text";
+import Text from "./Text";
 import { theme, ThemeType } from "../../theme/theme";
 
 

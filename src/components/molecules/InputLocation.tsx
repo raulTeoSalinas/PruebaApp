@@ -1,8 +1,9 @@
+import { useMemo, useRef, useCallback } from "react";
 import styled from "styled-components/native"
 import { theme } from "../../theme/theme";
 import Text from "../atoms/Text";
 import { Airport } from "../../models/Airport";
-import BottomSheet, { TouchableOpacity } from '@gorhom/bottom-sheet';
+import { TouchableOpacity, BottomSheetModal } from '@gorhom/bottom-sheet';
 import useInputLocation from "../../viewModels/inputLocation";
 
 // Type definition
@@ -16,17 +17,17 @@ type InputLocationProps = {
 // Component definition
 const InputLocation: React.FC<InputLocationProps> = ({ airport, setAirport, description, airports }) => {
 
-    // Hook for using Present Modal
-    const { presentRef, snapPoints, handlePressAirport, handleOpenModal } = useInputLocation(airport, setAirport)
+    // Hook for using Input Location
+    const { presentRef, snapPoints, handleOpenModal, handlePressAirport } = useInputLocation(setAirport)
+
 
     // Subcomponent Modal
     const Modal = () => (
-        <BottomSheet
-            index={-1}
+        <BottomSheetModal
+            index={0}
             ref={presentRef}
             snapPoints={snapPoints}
             handleIndicatorStyle={{ backgroundColor: theme.colors.knobUnactive }}
-            enablePanDownToClose
             backgroundStyle={{ backgroundColor: theme.colors.background, borderWidth: 1, borderColor: theme.colors.border }}
         >
             <Text bold textAlign="center" style={{ marginBottom: "2%" }}>Please, Select {description} Airport.</Text>
@@ -40,7 +41,7 @@ const InputLocation: React.FC<InputLocationProps> = ({ airport, setAirport, desc
                     </AirportSelect>
                 ))
             }
-        </BottomSheet>
+        </BottomSheetModal>
     )
 
     // Location input
@@ -54,13 +55,14 @@ const InputLocation: React.FC<InputLocationProps> = ({ airport, setAirport, desc
                         <Text color="textLight" bold>{airport.code}</Text>
                     </LocationRow>
                 ) : (
-                    <Text>Choose...</Text>
+                    <Text color="textLight">Choose...</Text>
                 )}
             </Container>
             <Modal />
         </>
     )
 }
+
 
 
 // Styled Components
