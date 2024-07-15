@@ -9,12 +9,14 @@ import { theme, ThemeType } from "../../theme/theme";
 interface TextButtonProps extends TouchableOpacityProps {
     textColor?: keyof ThemeType["colors"];
     textSize?: keyof ThemeType["fontSizes"];
+    bold?: boolean,
 }
 
 const TextButton: React.FC<TextButtonProps> = ({
     children,
     textColor = "primary", // Default value
     textSize = "medium", // Default value
+    bold,
     ...restProps
 }) => {
     return (
@@ -22,7 +24,7 @@ const TextButton: React.FC<TextButtonProps> = ({
             {...restProps}
             activeOpacity={0.8}
         >
-            <Text style={{ textDecorationLine: "underline" }} bold color={textColor} size={textSize}>
+            <Text bold={bold} style={{ textDecorationLine: "underline" }} color={textColor} size={textSize}>
                 {children}
             </Text>
         </TouchableOpacity>

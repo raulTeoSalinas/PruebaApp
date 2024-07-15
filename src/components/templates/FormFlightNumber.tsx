@@ -13,6 +13,7 @@ interface FormFlightNumberProps {
     departureDate: string | null;
     setDepartureDate: (departureDate: string | null) => void;
     setIsByFlightNumber: (isByFlightNumber: boolean) => void;
+    navigateFLScreen: () => void;
 }
 
 const FormFlightNumber: React.FC<FormFlightNumberProps> = ({
@@ -20,7 +21,8 @@ const FormFlightNumber: React.FC<FormFlightNumberProps> = ({
     setFlightNumber,
     departureDate,
     setDepartureDate,
-    setIsByFlightNumber
+    setIsByFlightNumber,
+    navigateFLScreen
 }) => {
 
     return (
@@ -30,13 +32,13 @@ const FormFlightNumber: React.FC<FormFlightNumberProps> = ({
                 <InputDate date={departureDate} setDate={setDepartureDate} description="departure" />
             </RowInputs>
             <ButtonContainer>
-                <PillButton size="large">Search Flight</PillButton>
+                <PillButton onPress={navigateFLScreen} size="large">Search Flight</PillButton>
             </ButtonContainer>
             <LegendContainer>
                 <Text color="textLight2" size="extraSmall">Can't find your flight number?</Text>
                 <LegendRow>
                     <Text color="textLight2" size="extraSmall">Try searching by</Text>
-                    <TextButton onPress={() => setIsByFlightNumber(false)} textColor="textLight2" textSize="extraSmall">destination</TextButton>
+                    <TextButton bold={true} onPress={() => setIsByFlightNumber(false)} textColor="textLight2" textSize="extraSmall">destination</TextButton>
                 </LegendRow>
             </LegendContainer>
         </>
