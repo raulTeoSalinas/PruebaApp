@@ -8,7 +8,14 @@ import { theme } from "../../theme/theme"
 import TextButton from "../atoms/TextButton"
 import Itinerary from "../molecules/Itinerary"
 import Knob from "../atoms/Knob"
+import { NativeStackNavigationProp } from "@react-navigation/native-stack"
+import { RootStackParamList } from "../../../App"
+import { useNavigation } from "@react-navigation/native"
 
+type FlightDetailScreenNavigationProp = NativeStackNavigationProp<
+    RootStackParamList,
+    "FlightDetailScreen"
+>;
 
 type CardFlightStatusProps = {
     flightStatus: FlightStatus;
@@ -20,6 +27,14 @@ const CardFlightStatus: React.FC<CardFlightStatusProps> = ({ flightStatus }) => 
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     };
 
+    const navigation = useNavigation<FlightDetailScreenNavigationProp>();
+
+
+    const navigateFDScreen = () => {
+        navigation.navigate("FlightDetailScreen", {
+            flightStatus: flightStatus
+        })
+    }
 
 
     return (
@@ -37,7 +52,14 @@ const CardFlightStatus: React.FC<CardFlightStatusProps> = ({ flightStatus }) => 
             <ContainerItinerary>
                 <Itinerary flightStatus={flightStatus} />
             </ContainerItinerary>
+            <RowItinerary style={{ paddingVertical: 4, marginVertical: 4, width: "100%", paddingHorizontal: "5%", borderColor: theme.colors.border, borderTopWidth: 1 }}>
+                <Text bold size="small" color="primary">AM {flightStatus.segment.operatingFlightCode}</Text>
 
+                <RowBtnTxt>
+                    <TextButton onPress={navigateFDScreen} textSize="extraSmall">Details</TextButton>
+                    <Icon width={8} height={12} name="arrowRight" />
+                </RowBtnTxt>
+            </RowItinerary>
         </Container>
     )
 }
@@ -51,7 +73,6 @@ const Container = styled.View`
     align-items: flex-start;
     border-radius: 12px;
     border: 2px solid ${(props) => props.theme.colors.primary};
-    margin-bottom: 20px;
 `
 const FlagStatus = styled(View) <{ status: string }>`
   background-color: ${(props) =>
@@ -87,4 +108,16 @@ const ContainerKnob = styled.View`
     gap: 8px;
     margin-right: 5%;
 `
+const RowBtnTxt = styled.View`
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+`
 
+const RowItinerary = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+`

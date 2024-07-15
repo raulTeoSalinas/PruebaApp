@@ -6,13 +6,15 @@ import ThemeProvider from "./src/theme/ThemeProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   TrackFlightScreen,
-  FlightsListingScreen
+  FlightsListingScreen,
+  FlightDetailScreen
 } from "./src/screens";
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Airport } from "./src/models/Airport";
+import { FlightStatus } from "./src/models/FlightStatus";
 
 
 SplashScreen.preventAutoHideAsync();
@@ -24,7 +26,10 @@ export type RootStackParamList = {
     originAirport: Airport | null,
     destinationAirport: Airport | null
   };
-  TrackFlightScreen: undefined
+  TrackFlightScreen: undefined;
+  FlightDetailScreen: {
+    flightStatus: FlightStatus
+  }
 };
 
 
@@ -61,6 +66,7 @@ const App = () => {
             }}>
               <Stack.Screen name="TrackFlightScreen" component={TrackFlightScreen} />
               <Stack.Screen name="FlightsListingScreen" component={FlightsListingScreen} />
+              <Stack.Screen name="FlightDetailScreen" component={FlightDetailScreen} />
 
             </Stack.Navigator>
           </NavigationContainer>

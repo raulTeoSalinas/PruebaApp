@@ -19,6 +19,8 @@ const FlightsListingScreen: React.FC<FlightsListingScreenProps> = (props) => {
     const dispatch = useDispatch<AppDispatch>();
     const { flightStatusCollection, loading, error } = useSelector((state: RootState) => state.flights);
 
+
+
     const handleFetchByFlightCode = () => {
         dispatch(fetchFlightStatusByFlightCode({
             flightCode: "500",
@@ -62,7 +64,7 @@ const FlightsListingScreen: React.FC<FlightsListingScreenProps> = (props) => {
                     <Text size="small" color="textLight2">{flightStatusCollection.length} {flightStatusCollection.length == 1 ? "result" : "results"}</Text>
                 </RowHeader>
             </Header>
-            <ScrollView contentContainerStyle={{ width: "100%" }}>
+            <ScrollView contentContainerStyle={{ width: "100%", flexGrow: 1, gap: 20 }}>
                 {flightStatusCollection.map((flight, index) => (
                     <CardFlightStatus key={index} flightStatus={flight} />
                 ))}

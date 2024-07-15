@@ -7,10 +7,19 @@ import { FlightStatus } from "../../models/FlightStatus"
 import TextButton from "../atoms/TextButton"
 import { theme } from "../../theme/theme"
 import { View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import { NativeStackNavigationProp } from "@react-navigation/native-stack"
+import { RootStackParamList } from "../../../App"
+
+type FlightDetailScreenNavigationProp = NativeStackNavigationProp<
+    RootStackParamList,
+    "FlightDetailScreen"
+>;
 
 type ItineraryProps = {
     flightStatus: FlightStatus;
 }
+
 const Itinerary: React.FC<ItineraryProps> = ({ flightStatus }) => {
 
     const formatMinutes = (min: number) => {
@@ -18,6 +27,14 @@ const Itinerary: React.FC<ItineraryProps> = ({ flightStatus }) => {
         const minutes = min % 60;
         return `${hours}h ${minutes}m`
     }
+    const navigation = useNavigation<FlightDetailScreenNavigationProp>();
+
+    const navigateFDScreen = () => {
+        navigation.navigate("FlightDetailScreen", {
+            flightStatus: flightStatus
+        })
+    }
+
     return (
         <Container>
             <RowItinerary style={{ marginTop: 6 }}>
@@ -36,14 +53,7 @@ const Itinerary: React.FC<ItineraryProps> = ({ flightStatus }) => {
                 <Text bold color="textLight" size="tiny">{formatMinutes(flightStatus.totalFlightTimeInMinutes)}</Text>
                 <Text color="primary">{flightStatus.segment.arrivalAirport}</Text>
             </RowItinerary>
-            <RowItinerary style={{ paddingVertical: 4, marginVertical: 4, width: "100%", paddingHorizontal: "5%", borderColor: theme.colors.border, borderTopWidth: 1 }}>
-                <Text bold size="small" color="primary">AM {flightStatus.segment.operatingFlightCode}</Text>
 
-                <RowBtnTxt>
-                    <TextButton textSize="extraSmall">Details</TextButton>
-                    <Icon width={8} height={12} name="arrowRight" />
-                </RowBtnTxt>
-            </RowItinerary>
         </Container>
     )
 }
@@ -99,9 +109,3 @@ const DashedLine = styled(View) <{ status: string }>`
                         : 0};
 `
 
-const RowBtnTxt = styled.View`
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-`
