@@ -5,3 +5,4 @@ export { default as TextButton } from "./atoms/TextButton"
 
 export { default as InputLocation } from "./molecules/InputLocation"
 export { default as InputDate } from "./molecules/InputDate"
+export { default as InputFlightNumber } from "./molecules/InputFlightNumber"

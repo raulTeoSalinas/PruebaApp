@@ -1,4 +1,3 @@
-import { useMemo, useRef, useCallback } from "react";
 import styled from "styled-components/native"
 import { theme } from "../../theme/theme";
 import Text from "../atoms/Text";
@@ -62,7 +61,6 @@ const InputLocation: React.FC<InputLocationProps> = ({ airport, setAirport, desc
         </>
     )
 }
-
 
 
 // Styled Components
